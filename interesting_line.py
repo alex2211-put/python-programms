@@ -99,12 +99,12 @@ class Knot(Polyline):
         return res
 
 
-def draw_help():
+def draw_help(k):
     gameDisplay.fill((50, 50, 50))
     font1 = pygame.font.SysFont("courier", 24)
     font2 = pygame.font.SysFont("serif", 24)
-    data = [["F1", "Show Help"], ["R", "Restart"], ["P", "Pause/Play"], ["Num+", "More points"],
-            ["Num-", "Less points"], ["", ""], [str(35), "Current points"]]
+    data = [["F1", "Show Help"], ["R", "Restart"], ["P", "Pause/Play"], ["Ctrl+", "More points"],
+            ["Ctrl-", "Less points"], ["", ""], [str(k.steps), "Current points"]]
     pygame.draw.lines(gameDisplay, (255, 50, 50, 255), True, [
         (0, 0), (800, 0), (800, 600), (0, 600)], 5)
     for i, text in enumerate(data):
@@ -136,6 +136,7 @@ if __name__ == "__main__":
                 if event.key == pygame.K_r:
                     k.points = []
                     k.speeds = []
+                    pause = True
                 if event.key == pygame.K_p:
                     pause = not pause
                 if event.key == pygame.K_KP_PLUS:
@@ -156,7 +157,7 @@ if __name__ == "__main__":
         if not pause:
             k.set_points()
         if show_help:
-            draw_help()
+            draw_help(k)
 
         pygame.display.flip()
 
